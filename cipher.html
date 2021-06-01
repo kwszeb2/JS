@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cypher</title>
+    </head>
+    <style>
+        text {
+        display: block; 
+        }
+        body {
+            margin-top: 200px;
+        }
+        .box {
+            
+            display: block;
+            justify-content: center;
+            align-items: center;
+        }
+        .innerbox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: lightcoral;
+            margin: 150px;
+            padding: 50px;
+        }
+        input {
+            margin-top: 10px;
+            width: 100%;
+        }
+    </style>
+    <script>
+        var text;
+        var word = [];
+        var rand = Math.floor(Math.random()*25)+1;
+        
+        function convert(){
+            text = document.getElementById('inputText').value;
+            document.getElementById('inputText').innerHTML = text;
+            
+            for(var i = 0; i < text.length; i++){
+                var ltrToNum = text.charCodeAt(i);
+                var shiftLtr = rand + ltrToNum;
+                if(shiftLtr <= 122){
+                    var numToLtr = String.fromCharCode(shiftLtr);
+                    word.push(numToLtr);
+                    console.log(ltrToNum+ ' '+ shiftLtr+' '+numToLtr);
+                }
+                else{
+                    var diff = shiftLtr - 122;
+                    var diffLtr = String.fromCharCode(96+diff);
+                    word.push(diffLtr);
+                    console.log(ltrToNum+ ' '+ shiftLtr+' '+diff+' '+diffLtr);
+                }
+            }
+
+            var ouputText = document.getElementById('outputText');
+            var convertedText = word.join('');
+            ouputText.value = convertedText;
+            console.log('words converted '+ convertedText);
+        }
+    </script>
+    <body>
+        <div class="innerbox">
+            <div class="box">
+                Input word to encrypt and press Enter: 
+                <div>
+                    <input type="text" onchange="convert()" id="inputText">
+                </div>
+                <br/><br/>Encrypted word:
+                <div>
+                    <input type="text" id="outputText">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
